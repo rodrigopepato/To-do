@@ -31,6 +31,14 @@ class Task
         return $stmt->execute();
     }
 
+    public function markTaskPending($id)
+    {
+        $stmt = $this->db->prepare("UPDATE tasks SET is_done = 0 WHERE id = ?");
+        $stmt->bind_param("i", $id);
+        return $stmt->execute();
+    }
+
+
     public function deleteTask($id)
     {
         $stmt = $this->db->prepare("DELETE FROM tasks WHERE id = ?");

@@ -27,17 +27,20 @@ $tasks = $task->getAllTasks();
     <h1>Lista de Tarefas</h1>
     <a href="add_task.php">Adicionar Tarefa</a>
     <ul>
-        <?php while ($row = $tasks->fetch_assoc()): ?>
-            <li>
-                <?= $row['is_done']
-                    ? '<s>' . htmlspecialchars($row['description']) . '</s>'
-                    : htmlspecialchars($row['description']) ?>
-
-                <?php if (!$row['is_done']): ?>
-                    <a href="mark_done.php?id=<?= $row['id'] ?>">✔</a>
-                <?php endif; ?>
-            </li>
-        <?php endwhile; ?>
-    </ul>
+    <?php while ($row = $tasks->fetch_assoc()): ?>
+        <li>
+            <?php if ($row['is_done']): ?>
+                <!-- Se a tarefa estiver concluída, clicar no nome a marcará como não concluída -->
+                <a href="mark_pending.php?id=<?= $row['id'] ?>" style="text-decoration: none; color: gray;">
+                    <s><?= htmlspecialchars($row['description']) ?></s>
+                </a>
+            <?php else: ?>
+                <!-- Se a tarefa não estiver concluída, exibe o nome normalmente e o ícone ✔ -->
+                <?= htmlspecialchars($row['description']) ?>
+                <a href="mark_done.php?id=<?= $row['id'] ?>">✔</a>
+            <?php endif; ?>
+        </li>
+    <?php endwhile; ?>
+</ul>
 </body>
 </html>
