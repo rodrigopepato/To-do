@@ -50,6 +50,7 @@ $tasks = $task->getAllTasks();
                             <?php if (!$row['is_done']): ?>
                                 <a href="mark_done.php?id=<?= $row['id'] ?>">✔</a>
                             <?php endif; ?>
+                            <a href="edit_task.php?id=<?= $row['id'] ?>" style="color: blue;">✏️</a>
                             <a href="delete_task.php?id=<?= $row['id'] ?>" style="color: red;">❌</a>
                         </div>
                     </li>
